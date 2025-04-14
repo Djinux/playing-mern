@@ -8,7 +8,7 @@ dotenv.config();
 
 // connect to database (in this case: I have my database locally)
 try {
-  mongoose.connect('mongodb://127.0.0.1:27017/TaskManager');
+  mongoose.connect('mongodb://127.0.0.1:27017/TaskManager-test');
   console.info('Connected to database!');
 } catch (error) {
   next(error);
@@ -19,11 +19,12 @@ const app = express();
 
 // we use body-parser, so we have to turn off urlencoded (by default equals true)
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // ***********      Step 2: require needed routes and app.use them      **********
-//const userRoutes = require('./routes/users.js');
+const authRoutes = require('./routes/auth.js');
 
-//app.use('/users', userRoutes);
+app.use('/', authRoutes);
 
 // if it falls trough -> 404 page not found (wrond url)
 app.use((req, res, next) => {

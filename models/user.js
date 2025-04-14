@@ -4,11 +4,9 @@ const { Task } = require('./task');
 
 const userSchema = new mongoose.Schema(
   {
-    _id: mongoose.Schema.Types.ObjectId,
     username: {
       type: String,
       required: [true, 'Username is required.'],
-      unique: true,
       minLength: [3, 'Username has to be at least 8 characters long.'],
       maxLength: [50, 'Username cannot be longer than 50 characters.']
     },
